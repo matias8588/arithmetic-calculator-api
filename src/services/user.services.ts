@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import boom from "@hapi/boom";
 
 import { models } from "../lib/sequelize";
 
@@ -20,6 +21,21 @@ class UserService {
   async find() {
     const users = await models.User.findAll();
     return users;
+  }
+
+  async findByEmail(email: string) {
+    const rta = await models.User.findOne({
+      where: { email },
+    });
+    return rta;
+  }
+
+  async findOne(id: string) {
+    const user = await models.User.findByPk(id);
+    if (!user) {
+      throw boom.notFound("user not found");
+    }
+    return user;
   }
 }
 

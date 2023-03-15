@@ -1,26 +1,47 @@
 {
-  "name": "arithmetic-calculator-api",
+  "name": "server-arithmetic-calculator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "nodemon build/index.js",
+    "build": "rimraf ./build && tsc",
+    "dev": "yarn build && nodemon build/index.js",
     "start": "node build/index.js",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
     "migrations:revert": "sequelize-cli db:migrate:undo",
-    "migrations:delete": "sequelize-cli db:migrate:undo:all"
+    "migrations:delete": "sequelize-cli db:migrate:undo:all",
+    "lint": "eslint . --ext .ts",
+    "prettier-format": "run-script-os",
+    "prettier-format:darwin:linux": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prettier-format:default": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prettier-watch": "run-script-os",
+    "prettier-watch:win32": "onchange \"src/**/*.ts\" -- prettier --write {{changed}}",
+    "prettier-watch:darwin:linux": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
+    "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
+    "test": "jest",
+    "test:dev": "jest --watchAll"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run prettier-format && npm run lint"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.8.3",
+    "jsonwebtoken": "^9.0.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "pg": "^8.10.0",
     "sequelize": "^6.29.3",
     "sequelize-cli": "^6.6.0"
@@ -29,8 +50,14 @@
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/passport": "^1.0.12",
+    "@types/passport-jwt": "^3.0.8",
+    "@types/passport-local": "^1.0.35",
     "@types/pg": "^8.6.6",
     "nodemon": "^2.0.21",
+    "husky": "^8.0.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.9.5"
   }
 }

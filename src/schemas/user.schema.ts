@@ -11,4 +11,10 @@ const createUserSchema = Joi.object({
   isActive,
 });
 
-export { createUserSchema };
+const login = Joi.object({
+  email: email.required(),
+  password: password.required(),
+  isActive,
+});
+
+export { createUserSchema, login };

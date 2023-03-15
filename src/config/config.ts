@@ -11,5 +11,6 @@ const config = {
   dbPort: process.env.DB_PORT || "",
   apiKey: process.env.API_KEY || "",
   secretKey: process.env.SECRET_KEY || "",
+  secretRefreshToken: process.env.SECRET_REFRESH_TOKEN || "",
 };
 export { config };
