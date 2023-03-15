@@ -1,6 +1,6 @@
-import { Model, DataTypes, Sequelize } from "sequelize";
+import { Model, DataTypes, Sequelize } from 'sequelize';
 
-const OPERATION_TABLE = "operation";
+const OPERATION_TABLE = 'operation';
 
 const OperationSchema = {
   id: {
@@ -22,8 +22,8 @@ const OperationSchema = {
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: "created_at",
-    defaultValue: Sequelize.fn("NOW"),
+    field: 'created_at',
+    defaultValue: Sequelize.fn('NOW'),
   },
 };
 
@@ -32,7 +32,7 @@ class Operation extends Model {
     return {
       sequelize,
       tableName: OPERATION_TABLE,
-      modelName: "Operation",
+      modelName: 'Operation',
       timestamps: false,
     };
   }

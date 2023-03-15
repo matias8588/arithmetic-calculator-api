@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from "express";
-import boom from "@hapi/boom";
+import { NextFunction, Request, Response } from 'express';
+import boom from '@hapi/boom';
 
-import AuthService from "../services/auth.service";
-import { config } from "../config/config";
+import AuthService from '../services/auth.service';
+import { config } from '../config/config';
 
 const service = new AuthService();
 
@@ -19,7 +19,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       next(boom.unauthorized());
       return;
     }
-    const token: string = req?.headers?.authorization?.split(" ").pop() || "";
+    const token: string = req?.headers?.authorization?.split(' ').pop() || '';
     const dataToken: any = service.verify(token, config.secretKey);
 
     if (!dataToken?.email) {
@@ -35,11 +35,11 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 const authRefreshToken = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const refreshToken: string =
-      req?.headers?.authorization?.split(" ").pop() || "";
+      req?.headers?.authorization?.split(' ').pop() || '';
 
     if (!refreshToken) {
       next(boom.unauthorized());

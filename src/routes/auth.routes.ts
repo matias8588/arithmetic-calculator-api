@@ -1,13 +1,13 @@
-import express, { NextFunction, Request, Response } from "express";
-import passport from "passport";
-import boom from "@hapi/boom";
+import express, { NextFunction, Request, Response } from 'express';
+import passport from 'passport';
+import boom from '@hapi/boom';
 
-import AuthService from "../services/auth.service";
-import validatorHandler from "../middleware/validator.handler";
-import { login } from "../schemas/user.schema";
-import { authRefreshToken } from "../middleware/auth";
-import { config } from "../config/config";
-import UserService from "../services/user.services";
+import AuthService from '../services/auth.service';
+import validatorHandler from '../middleware/validator.handler';
+import { login } from '../schemas/user.schema';
+import { authRefreshToken } from '../middleware/auth';
+import { config } from '../config/config';
+import UserService from '../services/user.services';
 
 const service = new AuthService();
 const userService = new UserService();
@@ -15,9 +15,9 @@ const userService = new UserService();
 const router = express.Router();
 
 router.post(
-  "/login",
-  validatorHandler(login, "body"),
-  passport.authenticate("local", { session: false }),
+  '/login',
+  validatorHandler(login, 'body'),
+  passport.authenticate('local', { session: false }),
   (req: Request, res: Response, next: NextFunction) => {
     try {
       const { user, token, refreshToken } = service.signToken(req.user);
@@ -29,16 +29,16 @@ router.post(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 router.get(
-  "/refresh",
+  '/refresh',
   authRefreshToken,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const refreshToken: string =
-        req?.headers?.authorization?.split(" ").pop() || "";
+        req?.headers?.authorization?.split(' ').pop() || '';
 
       if (!refreshToken) {
         next(boom.unauthorized());
@@ -46,7 +46,7 @@ router.get(
 
       const userData: any = service.verify(
         refreshToken,
-        config.secretRefreshToken
+        config.secretRefreshToken,
       );
       const user = await userService.findByEmail(userData?.email);
 
@@ -58,7 +58,7 @@ router.get(
     } catch (error: any) {
       next(boom.unauthorized(error));
     }
-  }
+  },
 );
 
 export default router;

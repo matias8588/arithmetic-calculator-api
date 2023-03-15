@@ -1,7 +1,6 @@
-import boom from "@hapi/boom";
-import jwt from "jsonwebtoken";
-import { config } from "../../config/config";
-import { Response } from "express";
+import boom from '@hapi/boom';
+import jwt from 'jsonwebtoken';
+import { config } from '../../config/config';
 
 interface IPayload {
   sub: string;

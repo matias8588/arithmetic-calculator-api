@@ -1,11 +1,11 @@
-import { Strategy } from "passport-local";
+import { Strategy } from 'passport-local';
 
-import AuthService from "../../../services/auth.service";
+import AuthService from '../../../services/auth.service';
 
 const service = new AuthService();
 
 const LocalStrategy = new Strategy(
-  { usernameField: "email", passwordField: "password" },
+  { usernameField: 'email', passwordField: 'password' },
   async (email, password, done) => {
     try {
       const user = await service.getUser(email, password);
@@ -14,7 +14,7 @@ const LocalStrategy = new Strategy(
     } catch (error) {
       done(error, false);
     }
-  }
+  },
 );
 
 export default LocalStrategy;

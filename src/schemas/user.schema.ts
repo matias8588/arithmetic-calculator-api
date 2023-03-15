@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 const id = Joi.string().uuid();
 const email = Joi.string().email();

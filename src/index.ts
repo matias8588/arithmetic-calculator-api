@@ -1,13 +1,13 @@
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
 
-import routerApi from "./routes";
+import routerApi from './routes';
 import {
   logErrors,
   errorHandler,
   boomErrorHandler,
   ormErrorHandler,
-} from "./middleware/error.handlers";
+} from './middleware/error.handlers';
 
 const app = express();
 
@@ -15,8 +15,8 @@ app.use(express.json());
 
 app.use(cors());
 
-import "./utils/auth";
-import { config } from "./config/config";
+import './utils/auth';
+import { config } from './config/config';
 
 routerApi(app);
 

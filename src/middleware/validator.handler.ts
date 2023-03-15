@@ -1,8 +1,8 @@
-import boom from "@hapi/boom";
-import { NextFunction, Request, Response } from "express";
-import { Schema } from "joi";
+import boom from '@hapi/boom';
+import { NextFunction, Request, Response } from 'express';
+import { Schema } from 'joi';
 
-type Property = "params" | "body" | "query";
+type Property = 'params' | 'body' | 'query';
 
 function validatorHandler(schema: Schema, property: Property) {
   return (req: Request, res: Response, next: NextFunction) => {

@@ -1,6 +1,6 @@
-import { Model, DataTypes, Sequelize, ModelStatic } from "sequelize";
+import { Model, DataTypes, Sequelize, ModelStatic } from 'sequelize';
 
-const USER_TABLE = "users";
+const USER_TABLE = 'users';
 
 const UserSchema = {
   id: {
@@ -21,22 +21,22 @@ const UserSchema = {
   isActive: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
-    field: "is_active",
+    field: 'is_active',
     defaultValue: true,
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: "create_at",
-    defaultValue: Sequelize.fn("NOW"),
+    field: 'create_at',
+    defaultValue: Sequelize.fn('NOW'),
   },
 };
 
 class User extends Model {
   static associate(models: { Record: ModelStatic<Model<any, any>> }) {
     this.hasOne(models.Record, {
-      as: "record",
-      foreignKey: "userId",
+      as: 'record',
+      foreignKey: 'userId',
     });
   }
 
@@ -44,7 +44,7 @@ class User extends Model {
     return {
       sequelize,
       tableName: USER_TABLE,
-      modelName: "User",
+      modelName: 'User',
       timestamps: false,
     };
   }

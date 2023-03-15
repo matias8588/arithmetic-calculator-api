@@ -1,5 +1,5 @@
-import { NextFunction, Response, Request } from "express";
-import { ValidationError } from "sequelize";
+import { NextFunction, Response, Request } from 'express';
+import { ValidationError } from 'sequelize';
 
 function logErrors(err: any, req: Request, res: Response, next: NextFunction) {
   next(err);
@@ -9,7 +9,7 @@ function errorHandler(
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   res.status(500).json({
     message: err.message,
@@ -31,7 +31,7 @@ function ormErrorHandler(
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   if (err instanceof ValidationError) {
     res.status(409).json({

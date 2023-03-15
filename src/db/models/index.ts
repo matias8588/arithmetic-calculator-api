@@ -1,6 +1,6 @@
-import { User, UserSchema } from "./user.models";
-import { Operation, OperationSchema } from "./operation.models";
-import { Record, RecordSchema } from "./record.models";
+import { User, UserSchema } from './user.models';
+import { Operation, OperationSchema } from './operation.models';
+import { Record, RecordSchema } from './record.models';
 
 function setupModels(sequelize: any) {
   User.init(UserSchema, User.config(sequelize));
