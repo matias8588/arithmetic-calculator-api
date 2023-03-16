@@ -9,6 +9,8 @@ interface IData {
   isActive: boolean;
 }
 class UserService {
+  constructor() {}
+
   async create(data: IData) {
     const hash = await bcrypt.hash(data.password, 10);
     const newUser = await models.User.create({ ...data, password: hash });

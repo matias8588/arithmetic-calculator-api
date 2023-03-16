@@ -3,6 +3,8 @@ import boom from '@hapi/boom';
 import { models } from '../lib/sequelize';
 
 class OperationsService {
+  constructor() {}
+
   async find() {
     const operations = await models.Operation.findAll();
     return operations;
