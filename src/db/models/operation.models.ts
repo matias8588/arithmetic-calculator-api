@@ -1,4 +1,5 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
+import { USER_TABLE } from './user.models';
 
 const OPERATION_TABLE = 'operation';
 
@@ -18,6 +19,24 @@ const OperationSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     unique: true,
+  },
+  userId: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'user_id',
+    reference: {
+      model: USER_TABLE,
+      key: 'id',
+    },
+  },
+  operationId: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'operation_id',
+    reference: {
+      model: OPERATION_TABLE,
+      key: 'id',
+    },
   },
   createdAt: {
     allowNull: false,

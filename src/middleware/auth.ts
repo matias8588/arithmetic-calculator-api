@@ -26,6 +26,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       next(boom.unauthorized());
       return;
     }
+    req.user = dataToken.sub;
     next();
   } catch (error: any) {
     next(boom.unauthorized(error));

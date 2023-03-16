@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const { USER_TABLE } = require("./../models/user.models");
-const { OPERATION_TABLE } = require("./../models/operation.models");
-const { RECORD_TABLE } = require("./../models/record.models");
+const { USER_TABLE } = require('./../models/user.models.js');
+const { OPERATION_TABLE } = require('./../models/operation.models.js');
+const { RECORD_TABLE } = require('./../models/record.models.js');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -26,12 +26,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
         defaultValue: true,
-        field: "is_active",
+        field: 'is_active',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
-        field: "create_at",
+        field: 'create_at',
         defaultValue: Sequelize.NOW,
       },
     });
@@ -50,10 +50,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.INTEGER,
       },
+      userId: {
+        allowNull: false,
+        type: Sequelize.DataTypes.STRING,
+        field: 'user_id',
+        unique: true,
+        reference: {
+          model: USER_TABLE,
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
-        field: "created_at",
+        field: 'created_at',
         defaultValue: Sequelize.NOW,
       },
     });
@@ -67,13 +79,13 @@ module.exports = {
       operationId: {
         type: Sequelize.DataTypes.STRING,
         unique: true,
-        field: "operation_id",
+        field: 'operation_id',
         reference: {
           model: OPERATION_TABLE,
-          key: "id",
+          key: 'id',
         },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       amount: {
         type: Sequelize.DataTypes.INTEGER,
@@ -82,17 +94,17 @@ module.exports = {
       userBalance: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
-        field: "user_balance",
+        field: 'user_balance',
       },
       operationResponse: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
-        field: "operation_response",
+        field: 'operation_response',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DataTypes.DATE,
-        field: "created_at",
+        field: 'created_at',
         defaultValue: Sequelize.NOW,
       },
     });

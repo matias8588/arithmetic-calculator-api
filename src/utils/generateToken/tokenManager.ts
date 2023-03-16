@@ -1,6 +1,7 @@
 import boom from '@hapi/boom';
 import jwt from 'jsonwebtoken';
 import { config } from '../../config/config';
+import { Response } from 'express';
 
 interface IPayload {
   sub: string;
