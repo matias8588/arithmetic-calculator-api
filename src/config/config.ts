@@ -12,5 +12,6 @@ const config = {
   apiKey: process.env.API_KEY || '',
   secretKey: process.env.SECRET_KEY || '',
   secretRefreshToken: process.env.SECRET_REFRESH_TOKEN || '',
+  apiKeyRandom: process.env.API_KEY_RANDOM_ORG || '',
 };
 export { config };

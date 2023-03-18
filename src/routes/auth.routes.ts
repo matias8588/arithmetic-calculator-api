@@ -7,7 +7,7 @@ import validatorHandler from '../middleware/validator.handler';
 import { login } from '../schemas/user.schema';
 import { authRefreshToken } from '../middleware/auth';
 import { config } from '../config/config';
-import UserService from '../services/user.services';
+import UserService from '../services/user.service';
 
 const service = new AuthService();
 const userService = new UserService();

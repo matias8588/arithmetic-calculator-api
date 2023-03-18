@@ -1,5 +1,6 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes, Sequelize, ModelStatic } from 'sequelize';
 import { USER_TABLE } from './user.models';
+import { RECORD_TABLE } from './record.models';
 
 const OPERATION_TABLE = 'operation';
 
@@ -13,30 +14,37 @@ const OperationSchema = {
   type: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   cost: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true,
   },
   userId: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     field: 'user_id',
     reference: {
       model: USER_TABLE,
       key: 'id',
     },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   },
-  operationId: {
+  operationResponse: {
     allowNull: false,
     type: DataTypes.STRING,
-    field: 'operation_id',
+    field: 'operation_response',
+  },
+  recordId: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'record_id',
     reference: {
-      model: OPERATION_TABLE,
+      model: RECORD_TABLE,
       key: 'id',
     },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   },
   createdAt: {
     allowNull: false,
@@ -47,6 +55,9 @@ const OperationSchema = {
 };
 
 class Operation extends Model {
+  static associate(models: { Record: ModelStatic<Model<any, any>> }) {
+    this.belongsTo(models.Record, { as: 'record' });
+  }
   static config(sequelize: Sequelize) {
     return {
       sequelize,

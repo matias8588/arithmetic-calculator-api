@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize, ModelStatic } from 'sequelize';
-import { OPERATION_TABLE } from './operation.models';
+import { USER_TABLE } from './user.models';
 
 const RECORD_TABLE = 'records';
 
@@ -10,15 +10,16 @@ const RecordSchema = {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
-  operationId: {
+  userId: {
     allowNull: false,
-    type: DataTypes.STRING,
-    field: 'operation_id',
-    unique: true,
+    type: DataTypes.UUID,
+    field: 'user_id',
     reference: {
-      model: OPERATION_TABLE,
+      model: USER_TABLE,
       key: 'id',
     },
+    onUpDate: 'CASCADE',
+    onDelete: 'SET NULL',
   },
   amount: {
     allowNull: false,
@@ -26,13 +27,8 @@ const RecordSchema = {
   },
   userBalance: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     field: 'user_balance',
-  },
-  operationResponse: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    field: 'operation_response',
   },
   createdAt: {
     allowNull: false,
@@ -43,11 +39,15 @@ const RecordSchema = {
 };
 
 class Record extends Model {
-  static associate(models: { Operation: ModelStatic<Model<any, any>> }) {
-    this.hasOne(models.Operation, {
-      as: 'Operation',
-      foreignKey: 'operationId',
+  static associate(models: {
+    [x: string]: ModelStatic<Model<any, any>>;
+    Operation: ModelStatic<Model<any, any>>;
+  }) {
+    this.hasMany(models.Operation, {
+      as: 'operation',
+      foreignKey: 'record_id',
     });
+    this.belongsTo(models.User, { as: 'user' });
   }
 
   static config(sequelize: Sequelize) {

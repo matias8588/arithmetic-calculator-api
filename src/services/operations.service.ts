@@ -3,24 +3,29 @@ import boom from '@hapi/boom';
 import { models } from '../lib/sequelize';
 
 class OperationsService {
-  constructor() {}
+  async find(query: any) {
+    const options: any = {
+      where: {},
+    };
 
-  async find() {
-    const operations = await models.Operation.findAll();
+    const { limit, offset } = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const { type } = query;
+    if (type) {
+      options.where.type = type;
+    }
+
+    const operations = await models.Operation.findAll(options);
     return operations;
   }
 
   async create(data: any) {
     const operation = await models.Operation.create(data);
     return operation;
-  }
-
-  async findOne(id: string) {
-    const user = await models.User.findByPk(id);
-    if (!user) {
-      throw boom.notFound('user not found');
-    }
-    return user;
   }
 }
 

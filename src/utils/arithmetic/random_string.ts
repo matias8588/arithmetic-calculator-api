@@ -1,8 +1,9 @@
 import RandomOrg from 'random-org';
+import { config } from '../../config/config';
 
 export default async function randomString() {
   const random = new RandomOrg({
-    apiKey: 'fa9de9c9-3d62-4fb1-b41c-4b9a2b3ab6e8',
+    apiKey: config.apiKeyRandom,
   });
   const randomString = await random
     .generateStrings({ n: 1, length: 10, characters: 'string' })
@@ -10,5 +11,5 @@ export default async function randomString() {
       return result.random.data;
     });
 
-  return randomString;
+  return randomString[0];
 }

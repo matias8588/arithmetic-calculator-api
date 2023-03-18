@@ -22,6 +22,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
       },
+      amount: {
+        allowNull: false,
+        type: Sequelize.DataTypes.INTEGER,
+      },
       isActive: {
         allowNull: false,
         type: Sequelize.DataTypes.STRING,
@@ -52,15 +56,30 @@ module.exports = {
       },
       userId: {
         allowNull: false,
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.UUID,
         field: 'user_id',
-        unique: true,
         reference: {
           model: USER_TABLE,
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
+      },
+      recordId: {
+        allowNull: false,
+        type: Sequelize.DataTypes.STRING,
+        field: 'record_id',
+        reference: {
+          model: RECORD_TABLE,
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      operationResponse: {
+        allowNull: false,
+        type: Sequelize.DataTypes.STRING,
+        field: 'operation_response',
       },
       createdAt: {
         allowNull: false,
@@ -76,12 +95,12 @@ module.exports = {
         type: Sequelize.DataTypes.UUID,
         defaultValue: Sequelize.DataTypes.UUIDV4,
       },
-      operationId: {
-        type: Sequelize.DataTypes.STRING,
-        unique: true,
-        field: 'operation_id',
+      userId: {
+        type: Sequelize.DataTypes.UUID,
+        field: 'user_id',
+        allowNull: false,
         reference: {
-          model: OPERATION_TABLE,
+          model: USER_TABLE,
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -93,13 +112,8 @@ module.exports = {
       },
       userBalance: {
         allowNull: false,
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.INTEGER,
         field: 'user_balance',
-      },
-      operationResponse: {
-        allowNull: false,
-        type: Sequelize.DataTypes.STRING,
-        field: 'operation_response',
       },
       createdAt: {
         allowNull: false,

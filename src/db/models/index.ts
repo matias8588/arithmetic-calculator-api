@@ -9,6 +9,7 @@ function setupModels(sequelize: any) {
 
   User.associate(sequelize.models);
   Record.associate(sequelize.models);
+  Operation.associate(sequelize.models);
 }
 
 export { setupModels };

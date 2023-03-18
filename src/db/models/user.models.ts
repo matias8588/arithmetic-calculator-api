@@ -18,6 +18,10 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  amount: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+  },
   isActive: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
@@ -34,7 +38,7 @@ const UserSchema = {
 
 class User extends Model {
   static associate(models: { Record: ModelStatic<Model<any, any>> }) {
-    this.hasOne(models.Record, {
+    this.hasMany(models.Record, {
       as: 'record',
       foreignKey: 'userId',
     });

@@ -4,6 +4,7 @@ import { Express } from 'express-serve-static-core';
 import usersRouter from './users.routes';
 import authRouter from './auth.routes';
 import operationsRouter from './operations.routes';
+import recordRouter from './record.routes';
 
 function routerApi(app: Express) {
   const router = express.Router();
@@ -11,6 +12,7 @@ function routerApi(app: Express) {
   router.use('/users', usersRouter);
   router.use('/auth', authRouter);
   router.use('/operations', operationsRouter);
+  router.use('/record', recordRouter);
 }
 
 export default routerApi;

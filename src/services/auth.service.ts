@@ -2,20 +2,13 @@ import boom from '@hapi/boom';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import UserService from './user.services';
+import UserService from './user.service';
 import {
   generateRefreshToken,
   generateToken,
 } from '../utils/generateToken/tokenManager';
-import { Model } from 'sequelize';
 
 const service: UserService = new UserService();
-
-type User = {
-  email: string;
-  password: string;
-  id: string;
-};
 class AuthService {
   async getUser(email: string, password: string) {
     const user: any = await service.findByEmail(email);
