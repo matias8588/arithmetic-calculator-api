@@ -1,16 +1,18 @@
 {
   "version": 2,
-  "name": "arithmetic-calculator-api",
   "builds": [
     {
-      "src": "app.js",
-      "use": "@vercel/node"
+      "src": "build/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["build/**"]
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/app.js"
+      "dest": "build/index.js"
     }
   ]
 }
