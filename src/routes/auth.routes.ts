@@ -4,15 +4,20 @@ import boom from '@hapi/boom';
 
 import AuthService from '../services/auth.service';
 import validatorHandler from '../middleware/validator.handler';
-import { login } from '../schemas/user.schema';
+import { login } from '../schemas/auth.schema';
 import { authRefreshToken } from '../middleware/auth';
-import { config } from '../config/config';
+import config from '../config/config';
 import UserService from '../services/user.service';
 
 const service = new AuthService();
 const userService = new UserService();
 
 const router = express.Router();
+interface Error {
+  name: string;
+  message: string;
+  stack?: string;
+}
 
 router.post(
   '/login',
@@ -55,8 +60,8 @@ router.get(
         user,
         token,
       });
-    } catch (error: any) {
-      next(boom.unauthorized(error));
+    } catch (error) {
+      next(boom.unauthorized(error as Error));
     }
   },
 );

@@ -1,8 +1,8 @@
 import RandomOrg from 'random-org';
-import { config } from '../../config/config';
+import config from '../../config/config';
 
 export default async function randomString() {
-  const random = new RandomOrg({
+  let random = new RandomOrg({
     apiKey: config.apiKeyRandom,
   });
   const randomString = await random

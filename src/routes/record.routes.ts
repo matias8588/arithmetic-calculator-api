@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import { auth } from '../middleware/auth';
 import RecordService from '../services/record.service';
 import validatorHandler from '../middleware/validator.handler';
-import { queryRecordSchema } from '../schemas/record.schema';
+import { getRecordSchema, queryRecordSchema } from '../schemas/record.schema';
 
 const router = express.Router();
 const service = new RecordService();
@@ -25,6 +25,7 @@ router.get(
 router.get(
   '/:id',
   auth,
+  validatorHandler(getRecordSchema, 'params'),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;

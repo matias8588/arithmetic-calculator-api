@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-import { config } from '../config/config';
+import config from '../config/config';
 import { setupModels } from '../db/models/index';
 
 const USER = encodeURIComponent(config.dbUser);
@@ -11,8 +11,8 @@ const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${
 const sequelize = new Sequelize(URI, { dialect: 'postgres', logging: true });
 
 setupModels(sequelize);
-sequelize.sync();
+// sequelize.sync();
 
 const models = sequelize.models;
 
-export { models };
+export { models, sequelize };

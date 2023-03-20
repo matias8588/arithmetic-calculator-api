@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+
 dotenv.config();
 
 const config = {
@@ -14,4 +15,4 @@ const config = {
   secretRefreshToken: process.env.SECRET_REFRESH_TOKEN || '',
   apiKeyRandom: process.env.API_KEY_RANDOM_ORG || '',
 };
-export { config };
+export default config;

@@ -9,10 +9,19 @@ const amount = Joi.number().min(0);
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
 
+const getUserSchema = Joi.object({
+  id: id.required(),
+});
+
 const queryUserSchema = Joi.object({
   limit,
   offset,
   email,
+});
+
+const updateAmount = Joi.object({
+  amount: amount.required(),
+  isActive,
 });
 
 const createUserSchema = Joi.object({
@@ -22,10 +31,4 @@ const createUserSchema = Joi.object({
   isActive,
 });
 
-const login = Joi.object({
-  email: email.required(),
-  password: password.required(),
-  isActive,
-});
-
-export { createUserSchema, login, queryUserSchema };
+export { createUserSchema, queryUserSchema, getUserSchema, updateAmount };

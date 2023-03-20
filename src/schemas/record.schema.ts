@@ -22,4 +22,8 @@ const createRecordSchema = Joi.object({
   userBalance,
 });
 
-export { createRecordSchema, queryRecordSchema };
+const getRecordSchema = Joi.object({
+  id: id.required(),
+});
+
+export { createRecordSchema, queryRecordSchema, getRecordSchema };

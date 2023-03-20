@@ -12,6 +12,8 @@ export interface IRecord {
 }
 
 class RecordService {
+  constructor() {}
+
   async find(query: any) {
     const options: any = {
       include: ['user', 'operation'],
@@ -32,12 +34,14 @@ class RecordService {
     const record = await models.Record.findAll(options);
     return record;
   }
+
   async findOne(id: string) {
     const record = await models.Record.findByPk(id, {
       include: ['user', 'operation'],
     });
     return record;
   }
+
   async findByUser(userId: string) {
     const record = await models.Record.findOne({
       where: { userId },

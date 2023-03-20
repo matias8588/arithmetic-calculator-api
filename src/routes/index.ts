@@ -1,5 +1,4 @@
-import express from 'express';
-import { Express } from 'express-serve-static-core';
+import express, { Express } from 'express';
 
 import usersRouter from './users.routes';
 import authRouter from './auth.routes';

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import boom from '@hapi/boom';
 
 import AuthService from '../services/auth.service';
-import { config } from '../config/config';
+import config from '../config/config';
 
 const service = new AuthService();
 
@@ -11,6 +11,11 @@ export interface IPayloadToken {
   email: string;
   iat: number;
   exp: number;
+}
+interface Error {
+  name: string;
+  message: string;
+  stack?: string;
 }
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,8 +33,8 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
     }
     req.user = dataToken.sub;
     next();
-  } catch (error: any) {
-    next(boom.unauthorized(error));
+  } catch (error) {
+    next(boom.unauthorized(error as Error));
   }
 };
 
@@ -46,8 +51,8 @@ const authRefreshToken = async (
       next(boom.unauthorized());
     }
     next();
-  } catch (error: any) {
-    next(boom.unauthorized(error));
+  } catch (error) {
+    next(boom.unauthorized(error as Error));
   }
 };
 
