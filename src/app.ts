@@ -20,10 +20,6 @@ require('./utils/auth');
 
 routerApi(app);
 
-app.get('/ping', (_req, res) => {
-  return res.send('pong 🏓');
-});
-
 app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);

@@ -7,6 +7,14 @@ import recordRouter from './record.routes';
 
 function routerApi(app: Express) {
   const router = express.Router();
+
+  app.get('/', (_req, res) => {
+    return res.send('Express Typescript on Vercel');
+  });
+
+  app.get('/ping', (_req, res) => {
+    return res.send('pong 🏓');
+  });
   app.use('/api/v1', router);
   router.use('/users', usersRouter);
   router.use('/auth', authRouter);
