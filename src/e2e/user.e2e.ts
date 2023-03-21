@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 
 import { sequelize } from '../lib/sequelize';
-import app from '../app';
+import app from '../api';
 import { server } from '..';
 
 describe('test for p/users path', () => {
