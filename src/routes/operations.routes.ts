@@ -60,8 +60,8 @@ router.post(
 
       const result: string | number | null = await arithmeticFn({
         type,
-        numberA,
-        numberB,
+        numberA: parseInt(numberA),
+        numberB: parseInt(numberB),
       });
       const records = await recordService.findByUser(userId);
       const user = await userService.findOne(userId);
