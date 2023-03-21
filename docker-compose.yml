@@ -1,27 +1,22 @@
-version: '3.8'
+version: '3.3'
+
 services:
-  api:
-    container_name: api
-    restart: always
-    build: .
-    ports:
-      - ${PORT}:${PORT}
-    depends_on:
-      - db
-    volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
-
-  db:
-    container_name: postgres
+  postgres:
     image: postgres
-    ports:
-      - '5433:${DB_PORT}'
-    volumes:
-      - data:/data/db
+    restart: always
     environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
 
-volumes:
-  data: {}
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
