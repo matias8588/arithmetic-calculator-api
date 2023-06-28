@@ -52,3 +52,6 @@ The API endpoints are defined in the routerApi function in index.ts.
 - /api/v1/auth - Authentication endpoints
 - /api/v1/operations - Operations endpoints
 - /api/v1/record - Record endpoints
+
+## Disclaimer
+The API service is down. You can run it locally
